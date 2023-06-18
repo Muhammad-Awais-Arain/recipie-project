@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+
+
+<div class="container text-center">
+    <h2 class="mb-4">Profile</h2>
+    <div class="card mx-auto" style="max-width: 400px;">
+      <div class="card-body">
+        <img src="/media/icons/profile_icon.png" alt="Profile Image" class="img-fluid rounded-circle mb-3" style="width: 120px;">
+        <p class="mb-1"><strong>Username:</strong> {{ request.user.username }}</p>
+        <p class="mb-1"><strong>First Name:</strong> {{ request.user.first_name }}</p>
+        <p class="mb-3"><strong>Last Name:</strong> {{ request.user.last_name }}</p>
+        <a href="/edit_profile/" class="btn btn-primary">Edit Profile</a>
+      </div>
+    </div>
+</div>
+  
+
+{% endblock %}

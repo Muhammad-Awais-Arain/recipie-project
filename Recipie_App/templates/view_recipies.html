@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}s
+
+<div class="table-responsive container mt-5">
+
+    <table class="table table-bordered table-shadow">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Recipie Name</th>
+            <th scope="col">Recipie Description</th>
+            <th scope="col">Image</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for recipie in recipies %}
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{recipie.recipie_name}}</td>
+            <td>{{recipie.recipie_description}}</td>
+            <td>
+                <img src="/media/{{recipie.recipie_image}}" style="height: 80px;"/>
+            </td>
+            <td>
+                <a href="/update_recipie/{{recipie.id}}/" class="btn btn-primary">Update</a>
+                <a href="/delete_recipie/{{recipie.id}}/" class="btn btn-danger">Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+</div>
+
+{% endblock %}
