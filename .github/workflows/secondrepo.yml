@@ -1,9 +1,10 @@
 name: Playwright Tests in MyOtherRepo
 
 on:
+  push:
+    branches: [ main, master ]
   pull_request:
-    branches:
-      - main  # Replace with the appropriate branch name
+    branches: [ main, master ]
 
 jobs:
   test:
