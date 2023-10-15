@@ -7,3 +7,4 @@ class Recipie(models.Model):
     recipie_name = models.CharField(max_length=100)
     recipie_description = models.TextField()
     recipie_image = models.ImageField(upload_to="recipie")
+    recipie_view_count = models.IntegerField(default=1)

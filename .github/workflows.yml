@@ -1,0 +1,17 @@
+name: Playwright Tests in MyOtherRepo
+
+on:
+  pull_request:
+    branches:
+      - main  # Replace with the appropriate branch name
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Out Code
+        uses: actions/checkout@v2
+
+      - name: Run Playwright Tests
+        uses: Muhammad-Awais-Arain/Playwright-Tests/.github/workflows/playwright.yml
