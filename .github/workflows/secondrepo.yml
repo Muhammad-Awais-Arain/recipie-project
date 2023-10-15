@@ -15,6 +15,6 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run Playwright Tests
-        uses: ./.github/workflows/playwright.yml
+        uses: Muhammad-Awais-Arain/Playwright-Tests/.github/workflows/playwright.yml
       
       
