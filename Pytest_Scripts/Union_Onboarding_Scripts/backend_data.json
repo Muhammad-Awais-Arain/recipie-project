@@ -1,0 +1,22 @@
+{
+    "backends": [
+        {
+            "app_name": "Backend Automaton",
+            "website_link": "https://pffi.com",
+            "images": [
+                {"filename": "App_Logo.svg", "element_id": "app_logo"},
+                {"filename": "Top_Logo_With_Black_Text.svg", "element_id": "top_logo_with_black_text"},
+                {"filename": "Login_Logo.svg", "element_id": "login_logo"},
+                {"filename": "Favicon.ico", "element_id": "favicon"},
+                {"filename": "Newsletter_Logo.png", "element_id": "newsletter_logo"}
+            ],
+            "app_required": false,
+            "website_required": false,
+            "is_spanish_module_required": false,
+            "theme": 2,
+            "is_two_factor_auth_required": false,
+            "app_type": "OTHER TRADES",
+            "additional_notes": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        }
+    ]
+}

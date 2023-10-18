@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Backend Automation</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', path='images/icon.ico') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-primary">
+        <span class="navbar-brand mb-0 h1">LinkedUnion Automations</span>
+    </nav>      
+
+    <div class="container mt-5">
+        <div class="text-center">
+            <button id="runButton" class="btn btn-success mt-3" data-toggle="modal" data-target="#myModal">Navigation Scripts</button>
+            <button id="runV4" class="btn btn-success mt-3">Run All V4 Scripts Test</button>
+        </div>
+    </div>
+
+    <div class="background-container">
+        <div class="background-image"></div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form id="modalForm">
+                    <div class="modal-body">
+                        <select id="testType" class="form-control" required>
+                            <option value="" disabled selected>Select</option>
+                            <option value="test-event">Event Test</option>
+                            <option value="test-legislative">Legislative Test</option>
+                            <option value="test-memberdiscount">Member Discount Test</option>
+                            <option value="test-multiplenews">Multiple News Test</option>
+                        </select>
+                        <input type="text" id="url_enter" class="form-control mt-2" value="https://desibook.admin.linkedunion.org/">
+                    </div>                
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="modalSubmit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>    
+    
+    <div id="loadingScreen">
+        <div class="loading-gif">
+            <img src="{{ url_for('static', path='images/loading.gif') }}" alt="Loading ..." width="100" height="70"> 
+            <span>Running</span>       
+        </div>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.26/dist/sweetalert2.all.min.js"></script>
+    <script src="{{ url_for('static', path='js/index.js') }}"></script>
+ 
+</body>
+</html>

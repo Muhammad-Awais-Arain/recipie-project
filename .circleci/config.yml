@@ -1,0 +1,138 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@2.0.3
+  slack: circleci/slack@4.1.4
+
+executors:
+  pytest-executor:
+    docker:
+      - image: circleci/python:3.9
+    working_directory: /home/circleci/project
+
+jobs:
+  Automation_Scripts:
+    executor: python/default
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+      - run:
+          name: Run tests
+          command: |
+            python Pytest_Scripts/Stress_Testing_Scripts/Check_Status_Code_Live_Domains.py
+
+      # - validate-slack-environment-variables
+
+  # UI_Script:
+  #   executor: python/default
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: Install dependencies
+  #         command: |
+  #           pip install -r requirements.txt
+
+  #     - run:
+  #         name: Run Selenium tests
+  #         command: |
+  #           python Pytest_Scripts/Stress_Testing_Scripts/extract_actual_domains.py
+
+  V4_Scripts:
+    executor: python/default
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            pip install -r requirements.txt
+
+      - run:
+          name: Run V4 tests
+          command: |
+            python Pytest_Scripts/Stress_Testing_Scripts/V4_APIs/main_script.py
+
+
+# commands:
+#   validate-slack-environment-variables:
+#     description: "Validate whether slack channel and username are empty or not, fallback to default if empty"
+#     steps:
+#       - run:
+#           command: |
+#             echo $SLACK_CHANNEL
+#             if [ -z "$SLACK_CHANNEL" ]; then echo "export SLACK_CHANNEL=C05F4E3DSAK" >> $BASH_ENV; fi
+#             echo $SLACK_CHANNEL
+
+#   notify-slack:
+#     description: "Notify on slack"
+#     parameters:
+#       color:
+#         description: "Side divider color"
+#         type: string
+#         default: "#2eb886"
+
+#     steps:
+#       - run:
+#           name: 💸 Notifying slack
+#           when: always
+#           command: |
+#             curl --location --request POST 'https://slack.com/api/chat.postMessage' \
+#             --header "Authorization: Bearer $SLACK_BOT_TOKEN" \
+#             --header 'Content-Type: application/json' \
+#             --data-raw '{
+#               "channel" : "'"$SLACK_CHANNEL"'",
+#               "attachments": [
+#                 {
+#                   "color": "'"<< parameters.color >>"'",
+#                   "blocks": [
+#                     {
+#                       "type": "header",
+#                       "text": {
+#                         "type": "plain_text",
+#                         "text": "Automation Testing SQA",
+#                         "emoji": true
+#                       }
+#                     },
+#                     {
+#                       "type": "divider"
+#                     },
+#                     {
+#                       "type": "section",
+#                       "fields": [
+#                         {
+#                           "type": "mrkdwn",
+#                           "text": "All tests ran successfully"
+#                         }
+#                       ]
+#                     }
+#                   ]
+#                 }
+#               ]
+#             }'
+
+workflows:
+  version: 2
+  # build_and_test:
+  #   jobs:
+  #     - V4_Scripts:
+  #         filters:
+  #           branches:
+  #             only:
+  #               - master
+  #     - Automation_Scripts:
+  #         filters:
+  #           branches:
+  #             only:
+  #               - master
+
+  scheduled_workflows:
+    triggers:
+      - schedule:
+          cron: "0 3 * * *"  # Runs at 8:00 AM Pakistan Standard Time
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - Automation_Scripts
+      - V4_Scripts
