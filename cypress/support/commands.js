@@ -9,11 +9,11 @@ import "cypress-wait-until";
 //BACKEND LINK
 
 Cypress.Commands.add("backend_link", () => {
-  cy.visit("https://desibook.admin.linkedunion.org/");
+  cy.visit(Cypress.env('BACKEND_BASE_URL'));
 });
 //WEBSITE LINK
 Cypress.Commands.add("website_link", () => {
-  cy.visit("http://desibook.web.linkedunion.live/");
+  cy.visit('WEBSITE_BASE_URL');
 });
 
 // Back
@@ -24,8 +24,8 @@ Cypress.Commands.add("back", () => {
 //LOGIN
 
 Cypress.Commands.add("Login", () => {
-  cy.get('input[name="email"]').type("luautomatedguru@linkedunion.com");
-  cy.get('input[name="password"]').type("Automation@1234");
+  cy.get('input[name="email"]').type('luautomatedguru@linkedunion.com');
+  cy.get('input[name="password"]').type('Automation@1234');
   cy.get(".kt-checkbox > span").click();
   cy.get("#kt_login_signin_submit").click();
   //2FA
