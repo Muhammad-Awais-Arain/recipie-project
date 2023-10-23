@@ -9,12 +9,18 @@ import "cypress-wait-until";
 //BACKEND LINK
 
 Cypress.Commands.add("backend_link", () => {
-  cy.visit(Cypress.env('BACKEND_BASE_URL'));
-});
+  if (Cypress.env("ENVIRONMENT") === "Staging") {
+    cy.visit(Cypress.env("STAGING_BACKEND_BASE_URL"));
+  } else if (Cypress.env("ENVIRONMENT") === "Production") {
+    cy.visit(Cypress.env("PRODUCTION_BACKEND_BASE_URL"));
+  }});
 //WEBSITE LINK
 Cypress.Commands.add("website_link", () => {
-  cy.visit('WEBSITE_BASE_URL');
-});
+  if (Cypress.env("ENVIRONMENT") === "Staging") {
+    cy.visit(Cypress.env("STAGING_WEBSITE_BASE_URL"));
+  } else if (Cypress.env("ENVIRONMENT") === "Production") {
+    cy.visit(Cypress.env("PRODUCTION_WEBSITE_BASE_URL"));
+  }});
 
 // Back
 Cypress.Commands.add("back", () => {

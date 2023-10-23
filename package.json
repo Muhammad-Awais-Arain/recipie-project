@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "cypress-audit": "^1.1.0",
+    "dotenv": "^16.3.1",
     "mocha": "^10.2.0",
     "playwright-webkit": "^1.28.0"
   },

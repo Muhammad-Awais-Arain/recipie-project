@@ -1,14 +1,12 @@
 name: Cypress Tests
 
 on:
-    push:
-      branches: [main, master]
+  push:
+    branches: [main, master]
 
 jobs:
   cypress:
     runs-on: ubuntu-latest
-    env:
-      ENVIRONMENT: ${{ github.event.inputs.environment }}
 
     steps:
       - name: Checkout Code
@@ -18,7 +16,14 @@ jobs:
         uses: actions/setup-node@v2
 
       - name: Install Dependencies
-        run: npm install cypress --save-dev
-
+        run: |
+          npm install cypress --save-dev
+          npm install dotenv --save-dev
+          
+      - name: Set Environment Variables
+        run: |
+          echo "ENVIRONMENT=${{ github.event.inputs.environment }}" >> .env
+                    
       - name: Run Cypress Tests
-        run:  npx cypress run --spec cypress/e2e/Regression_tests/regression_backend.cy.js
+        run: |
+          npx cypress run --spec cypress/e2e/Regression_tests/regression_backend.cy.js
