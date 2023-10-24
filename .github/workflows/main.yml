@@ -14,8 +14,14 @@ jobs:
 
     env:
       ENVIRONMENT: ${{ github.event.inputs.environment }}
-
+      STAGING_BACKEND_BASE_URL: ${{ github.event.inputs.environment.STAGING_BACKEND_BASE_URL }}
+      STAGING_WEBSITE_BASE_URL: ${{ github.event.inputs.environment.STAGING_WEBSITE_BASE_URL }}
+      PRODUCTION_BACKEND_BASE_URL: ${{ github.event.inputs.environment.PRODUCTION_BACKEND_BASE_URL }}
+      PRODUCTION_WEBSITE_BASE_URL: ${{ github.event.inputs.environment.PRODUCTION_WEBSITE_BASE_URL }}
     steps:
+
+      - name: Deployement NAME
+        run: ${{ env.STAGING_BACKEND_BASE_URL }}
 
       - name: Checkout Code
         uses: actions/checkout@v2
