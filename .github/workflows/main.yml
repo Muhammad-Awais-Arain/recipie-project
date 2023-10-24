@@ -8,10 +8,16 @@ jobs:
   cypress:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        environment: [Staging, Production]
+
     env:
-      ENVIRONMENT: Staging
+      ENVIRONMENT: ${{ matrix.environment }}
       STAGING_BACKEND_BASE_URL: https://desibook.staging.linkedunion.org
       STAGING_WEBSITE_BASE_URL: http://desibook.web.linkedunion.info
+      PRODUCTION_BACKEND_BASE_URL: https://desibook.staging.linkedunion.com
+      PRODUCTION_WEBSITE_BASE_URL: https://desibook.web.linkedunion.live
 
     steps:
       - name: Checkout Code
@@ -28,8 +34,8 @@ jobs:
       - name: Print Environment Variables
         run: |
           echo "Environment: $ENVIRONMENT"
-          echo "Staging Backend URL: $STAGING_BACKEND_BASE_URL"
-          echo "Staging Website URL: $STAGING_WEBSITE_BASE_URL"
+          echo "Backend URL: $BACKEND_BASE_URL"
+          echo "Website URL: $WEBSITE_BASE_URL"
 
       - name: Run Cypress Tests
         run: |
