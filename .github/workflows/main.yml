@@ -23,9 +23,9 @@ jobs:
       - name: Set Environment Variables
         run: |
           if [ "$GITHUB_REF" == "refs/heads/staging" ]; then
-            echo "ENVIRONMENT=staging" >> .env
+            echo "$environments.production.production_backend_base_url" >> .env
           else
-            echo "ENVIRONMENT=production" >> .env
+          echo "$environments.staging.staging_backend_base_url" >> .env
           fi
 
       - name: Run Cypress Tests
