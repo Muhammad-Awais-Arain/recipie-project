@@ -8,6 +8,11 @@ jobs:
   cypress:
     runs-on: ubuntu-latest
 
+    env:
+      ENVIRONMENT: Staging
+      STAGING_BACKEND_BASE_URL: https://desibook.staging.linkedunion.org
+      STAGING_WEBSITE_BASE_URL: http://desibook.web.linkedunion.info
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
