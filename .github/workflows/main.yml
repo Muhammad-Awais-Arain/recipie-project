@@ -1,33 +1,30 @@
-name: Cypress Tests
+name: Print Cypress Environments
 
 on:
   push:
-    branches: [main, master]
+    branches:
+      ['main']
 
 jobs:
-  cypress:
+  print_environments:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-
-      - name: Install Dependencies
-        run: |
-          npm install cypress --save-dev
-          npm install dotenv --force
-
       - name: Set Environment Variables
         run: |
           if [ "$GITHUB_REF" == "refs/heads/staging" ]; then
-            echo "$environments.production.production_backend_base_url" >> .env
+            echo "ENVIRONMENT=staging" >> .env
+            echo "BACKEND_BASE_URL=$STAGING_BACKEND_BASE_URL" >> .env
+            echo "WEBSITE_BASE_URL=$STAGING_WEBSITE_BASE_URL" >> .env
           else
-          echo "$environments.staging.staging_backend_base_url" >> .env
+            echo "ENVIRONMENT=production" >> .env
+            echo "BACKEND_BASE_URL=$PRODUCTION_BACKEND_BASE_URL" >> .env
+            echo "WEBSITE_BASE_URL=$PRODUCTION_WEBSITE_BASE_URL" >> .env
           fi
 
-      - name: Run Cypress Tests
+      - name: Print Environment Variables
         run: |
-          npx cypress run --spec cypress/e2e/Regression_tests/regression_backend.cy.js
+          cat .env
