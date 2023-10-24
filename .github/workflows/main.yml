@@ -7,13 +7,18 @@ on:
 jobs:
   cypress:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         environment: [Staging, Production]
 
+    inputs:
+      environment:
+        description: 'Environment to run tests (e.g., Staging, Production)'
+        required: true
+        default: 'Staging'
+
     env:
-      ENVIRONMENT: ${{ matrix.environment }}
+      ENVIRONMENT: ${{ inputs.environment }}
       STAGING_BACKEND_BASE_URL: https://desibook.staging.linkedunion.org
       STAGING_WEBSITE_BASE_URL: http://desibook.web.linkedunion.info
       PRODUCTION_BACKEND_BASE_URL: https://desibook.admin.linkedunion.com
