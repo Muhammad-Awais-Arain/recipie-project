@@ -1,32 +1,31 @@
-name: Print Cypress Environment
+name: Cypress Tests
 
 on:
   push:
-    branches:
-      ['main']
+    branches: [main, master]
 
 jobs:
-  print_environment:
+  cypress:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Set Environment Variables
-        run: |
-          if [ "${GITHUB_REF##*/}" == "staging" ]; then
-            echo "Setting environment to staging"
-            echo "ENVIRONMENT=staging" >> .env
-            echo "BACKEND_BASE_URL=" >> .env
-            echo "WEBSITE_BASE_URL=" >> .env
-          else
-            echo "Setting environment to production"
-            echo "ENVIRONMENT=production" >> .env
-            echo "BACKEND_BASE_URL=" >> .env
-            echo "WEBSITE_BASE_URL=" >> .env
-          fi
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
 
-      - name: Print Environment Variables
+      - name: Install Dependencies
         run: |
-          cat .env
+          npm install cypress --save-dev
+          npm install dotenv --force
+
+        env:
+          ENVIRONMENT: Staging
+          STAGING_BACKEND_BASE_URL: https://desibook.staging.linkedunion.org
+          STAGING_WEBSITE_BASE_URL: http://desibook.web.linkedunion.info
+      
+
+      - name: Run Cypress Tests
+        run: |
+          npx cypress run --spec cypress/e2e/Regression_tests/regression_backend.cy.js
