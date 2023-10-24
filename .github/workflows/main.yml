@@ -1,24 +1,19 @@
 name: Cypress Tests
 
 on:
-  push:
-    branches: [main, master]
-
-jobs:
-  cypress:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        environment: [Staging, Production]
-
+  workflow_dispatch:
     inputs:
       environment:
         description: 'Environment to run tests (e.g., Staging, Production)'
         required: true
         default: 'Staging'
 
+jobs:
+  cypress:
+    runs-on: ubuntu-latest
+
     env:
-      ENVIRONMENT: ${{ inputs.environment }}
+      ENVIRONMENT: ${{ github.event.inputs.environment }}
       STAGING_BACKEND_BASE_URL: https://desibook.staging.linkedunion.org
       STAGING_WEBSITE_BASE_URL: http://desibook.web.linkedunion.info
       PRODUCTION_BACKEND_BASE_URL: https://desibook.admin.linkedunion.com
