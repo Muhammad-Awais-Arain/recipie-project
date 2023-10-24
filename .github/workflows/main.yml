@@ -14,10 +14,10 @@ jobs:
 
     env:
       ENVIRONMENT: ${{ github.event.inputs.environment }}
-      STAGING_BACKEND_BASE_URL: https://desibook.staging.linkedunion.org
-      STAGING_WEBSITE_BASE_URL: http://desibook.web.linkedunion.info
-      PRODUCTION_BACKEND_BASE_URL: https://desibook.admin.linkedunion.com
-      PRODUCTION_WEBSITE_BASE_URL: https://desibook.web.linkedunion.live
+      STAGING_BACKEND_BASE_URL: ${{ github.event.inputs.environment.STAGING_BACKEND_BASE_URL }}
+      STAGING_WEBSITE_BASE_URL: ${{ github.event.inputs.environment.STAGING_WEBSITE_BASE_URL }}
+      PRODUCTION_BACKEND_BASE_URL:  ${{ github.event.inputs.environment.PRODUCTION_BACKEND_BASE_URL }}
+      PRODUCTION_WEBSITE_BASE_URL:  ${{ github.event.inputs.environment.PRODUCTION_WEBSITE_BASE_URL }}
       # PRODUCTION_BACKEND_BASE_URL: https://desibook.admin.linkedunion.com
       # PRODUCTION_WEBSITE_BASE_URL: https://desibook.web.linkedunion.live
 
