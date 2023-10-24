@@ -16,7 +16,7 @@ jobs:
       ENVIRONMENT: ${{ matrix.environment }}
       STAGING_BACKEND_BASE_URL: https://desibook.staging.linkedunion.org
       STAGING_WEBSITE_BASE_URL: http://desibook.web.linkedunion.info
-      PRODUCTION_BACKEND_BASE_URL: https://desibook.staging.linkedunion.com
+      PRODUCTION_BACKEND_BASE_URL: https://desibook.admin.linkedunion.com
       PRODUCTION_WEBSITE_BASE_URL: https://desibook.web.linkedunion.live
 
     steps:
