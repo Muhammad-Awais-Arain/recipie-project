@@ -2,7 +2,9 @@ name: Cypress Tests
 
 on:
   push:
-    branches: [main, master]
+    branches:
+      - staging
+      - master
 
 jobs:
   cypress:
@@ -18,11 +20,15 @@ jobs:
       - name: Install Dependencies
         run: |
           npm install cypress --save-dev
-          npm install dotenv --force
-          
+          npm install dotenv --save-dev
+
       - name: Set Environment Variables
         run: |
-          echo "ENVIRONMENT=${{ github.event.inputs.environment }}" >> .env
+          if [ "$GITHUB_REF" == "refs/heads/staging" ]; then
+            echo "ENVIRONMENT=staging" >> .env
+          else
+            echo "ENVIRONMENT=production" >> .env
+          fi
 
       - name: Run Cypress Tests
         run: |
