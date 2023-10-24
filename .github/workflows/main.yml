@@ -15,14 +15,16 @@ jobs:
 
       - name: Set Environment Variables
         run: |
-          if [ "${{ github.ref }}" == "refs/heads/staging" ]; then
+          if [ "${GITHUB_REF##*/}" == "staging" ]; then
+            echo "Setting environment to staging"
             echo "ENVIRONMENT=staging" >> .env
-            echo "BACKEND_BASE_URL=${{ secrets.STAGING_BACKEND_BASE_URL }}" >> .env
-            echo "WEBSITE_BASE_URL=${{ secrets.STAGING_WEBSITE_BASE_URL }}" >> .env
+            echo "BACKEND_BASE_URL=" >> .env
+            echo "WEBSITE_BASE_URL=" >> .env
           else
+            echo "Setting environment to production"
             echo "ENVIRONMENT=production" >> .env
-            echo "BACKEND_BASE_URL=${{ secrets.PRODUCTION_BACKEND_BASE_URL }}" >> .env
-            echo "WEBSITE_BASE_URL=${{ secrets.PRODUCTION_WEBSITE_BASE_URL }}" >> .env
+            echo "BACKEND_BASE_URL=" >> .env
+            echo "WEBSITE_BASE_URL=" >> .env
           fi
 
       - name: Print Environment Variables
