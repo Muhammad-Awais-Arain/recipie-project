@@ -18,8 +18,14 @@ jobs:
       STAGING_WEBSITE_BASE_URL: http://desibook.web.linkedunion.info
       PRODUCTION_BACKEND_BASE_URL: https://desibook.admin.linkedunion.com
       PRODUCTION_WEBSITE_BASE_URL: https://desibook.web.linkedunion.live
+      # PRODUCTION_BACKEND_BASE_URL: https://desibook.admin.linkedunion.com
+      # PRODUCTION_WEBSITE_BASE_URL: https://desibook.web.linkedunion.live
 
     steps:
+
+      - name: Test Deployment
+        run: echo ${{ env.PRODUCTION_BACKEND_BASE_URL }} 
+
       - name: Checkout Code
         uses: actions/checkout@v2
 
