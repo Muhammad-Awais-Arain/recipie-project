@@ -20,11 +20,11 @@ jobs:
           npm install cypress --save-dev
           npm install dotenv --force
 
-        env:
-          ENVIRONMENT: Staging
-          STAGING_BACKEND_BASE_URL: https://desibook.staging.linkedunion.org
-          STAGING_WEBSITE_BASE_URL: http://desibook.web.linkedunion.info
-      
+      - name: Print Environment Variables
+        run: |
+          echo "Environment: $ENVIRONMENT"
+          echo "Staging Backend URL: $STAGING_BACKEND_BASE_URL"
+          echo "Staging Website URL: $STAGING_WEBSITE_BASE_URL"
 
       - name: Run Cypress Tests
         run: |
