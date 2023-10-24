@@ -1,4 +1,4 @@
-name: Print Cypress Environments
+name: Print Cypress Environment
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       ['main']
 
 jobs:
-  print_environments:
+  print_environment:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,14 +15,14 @@ jobs:
 
       - name: Set Environment Variables
         run: |
-          if [ "$GITHUB_REF" == "refs/heads/staging" ]; then
+          if [ "${{ github.ref }}" == "refs/heads/staging" ]; then
             echo "ENVIRONMENT=staging" >> .env
-            echo "BACKEND_BASE_URL=$STAGING_BACKEND_BASE_URL" >> .env
-            echo "WEBSITE_BASE_URL=$STAGING_WEBSITE_BASE_URL" >> .env
+            echo "BACKEND_BASE_URL=${{ secrets.STAGING_BACKEND_BASE_URL }}" >> .env
+            echo "WEBSITE_BASE_URL=${{ secrets.STAGING_WEBSITE_BASE_URL }}" >> .env
           else
             echo "ENVIRONMENT=production" >> .env
-            echo "BACKEND_BASE_URL=$PRODUCTION_BACKEND_BASE_URL" >> .env
-            echo "WEBSITE_BASE_URL=$PRODUCTION_WEBSITE_BASE_URL" >> .env
+            echo "BACKEND_BASE_URL=${{ secrets.PRODUCTION_BACKEND_BASE_URL }}" >> .env
+            echo "WEBSITE_BASE_URL=${{ secrets.PRODUCTION_WEBSITE_BASE_URL }}" >> .env
           fi
 
       - name: Print Environment Variables
